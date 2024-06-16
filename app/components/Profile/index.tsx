@@ -1,15 +1,19 @@
 import React, { CSSProperties } from "react";
 import Image from "next/image";
 
-const Profile = () => {
-  const user = {
-    profilePhoto:
-      "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=2342&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Replace with the path to your photo
-    username: "johndoe",
-    bio: "A passionate developer with a love for coding.",
-    skills: ["JavaScript", "React", "Next.js", "Node.js"],
-    location: "San Francisco, CA",
-  };
+
+interface userDetailsInterface {
+  key : number,
+  profilePhoto:string,
+    username: string,
+    bio: string,
+    skills: string,
+    location: string,
+}
+
+
+const Profile : React.FC<userDetailsInterface> = ({ profilePhoto, username, bio, skills, location }) => {
+
 
   const styles: { container: React.CSSProperties , profileHeader : React.CSSProperties , profilePhoto: CSSProperties , username : React.CSSProperties , bio : React.CSSProperties , details : React.CSSProperties , section : React.CSSProperties ,sectionTitle: React.CSSProperties ,
   skillsList: React.CSSProperties,
@@ -70,29 +74,26 @@ const Profile = () => {
     <div style={styles.container}>
       <div style={styles.profileHeader}>
         <Image
-          src={user.profilePhoto}
+          src={profilePhoto}
           alt="Profile Photo"
           width={150}
           height={150}
           style={styles.profilePhoto}
         />
-        <h1 style={styles.username}>{user.username}</h1>
+        <h1 style={styles.username}>{username}</h1>
       </div>
-      <p style={styles.bio}>{user.bio}</p>
+      <p style={styles.bio}>{bio}</p>
       <div style={styles.details}>
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>Skills</h2>
           <ul style={styles.skillsList}>
-            {user.skills.map((skill, index) => (
-              <li key={index} style={styles.skillItem}>
-                {skill}
-              </li>
-            ))}
+            
+            <li>{skills}</li>
           </ul>
         </div>
         <div style={styles.section}>
           <h2 style={styles.sectionTitle}>Location</h2>
-          <p style={styles.location}>{user.location}</p>
+          <p style={styles.location}>{location}</p>
         </div>
       </div>
     </div>
